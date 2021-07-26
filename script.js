@@ -1,7 +1,7 @@
 $(function () {
     const timeContainer$ = $('.container')
     const currentDay$ = $('#currentDay');
-    const description$ = $('.description');
+    const description$ = $('td.description');
     const textArea$ = $('textarea');
     const timeBlock$ = $('.time-block');
     const saveBtn$ = $('.saveBtn');
@@ -10,22 +10,23 @@ $(function () {
     currentDay$.text(today$);
 
     function setBackground() {
-        const currentHour$ = moment().format('k');
-        console.log(currentHour$);
-        textArea$.each(function () {
-            console.log($(this).attr("id"));
-            if ($(this).attr("id") < currentHour$) {
+        description$.each(function () {
+            let currentHour$ = moment().format('k');
+            let hour = Number($(this).attr("id"));
+           // console.log(currentHour$);
+           // console.log(hour);
+            if (hour < currentHour$) {
                 $(this).addClass("past");
-            } else if ($(this).attr("id") == currentHour$) {
+            } else if (hour == currentHour$) {
                 $(this).addClass("present");
-            } else if ($(this).attr("id") > currentHour$) {
+            } else if (hour > currentHour$) {
                 $(this).addClass("future");
             }
         });
 
     };
 
-setBackground();
+    setBackground();
 
 });
 
